@@ -3,16 +3,22 @@ import { ItemListComponent } from "./components/item-list/item-list.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
+import { UserNotAuthenticatedGuard } from './services/guards/user-not-authenticated.guard';
+import { UserAuthenticatedGuard } from './services/guards/user--authenticated.guard';
 
 export const routes: Routes = [
-    {path: 'login', component: LoginComponent},
     {
-        path: 'home', 
+      path: 'login', component: LoginComponent,
+      canActivate: [UserNotAuthenticatedGuard]
+    },
+    {
+        path: '',
         component: HomeComponent,
-        children: [            
-            {path: 'item-list', component: ItemListComponent},
+        canActivate: [UserAuthenticatedGuard],
+        children: [
+            {path: '', component: ItemListComponent},
         ]
     },
-    {path: '', component: LoginComponent},
+    // {path: '', component: LoginComponent},
     {path: '**', component: PageNotFoundComponent},
 ];

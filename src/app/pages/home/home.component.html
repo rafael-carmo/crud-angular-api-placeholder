@@ -1,9 +1,21 @@
-<p>home works!</p>
-<h1>Angular Router App</h1>
+<p>
+  <mat-toolbar color="primary" class="espacamento-toolbar">
+    <span>Exemplo login</span>
+    <!-- <span class="espacamento-toolbar"></span> -->
+    <button mat-icon-button (click)="deslogar()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+<mat-card-content>
+  <router-outlet />
+</mat-card-content>
+
+
+<!-- <h1>Angular Router App - Home</h1>
 <nav>
   <ul>
-    <!-- <li><a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">Home Component</a></li> -->
-    <li><a routerLink="item-list" routerLinkActive="active" ariaCurrentWhenActive="page">Crud Item</a></li>
+    <li><a routerLink="/home/item-list" routerLinkActive="active" ariaCurrentWhenActive="page">Crud Item</a></li>
   </ul>
 </nav>
-<router-outlet />
+<router-outlet /> -->
