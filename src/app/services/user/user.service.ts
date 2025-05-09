@@ -48,21 +48,21 @@ export class UserService {
     this.router.navigate(['login']);
   }
 
-  // get obterUsuarioLogado(): User {
-  //   return localStorage.getItem('user')
-  //     ? JSON.parse(atob(localStorage.getItem('user'))) as User
-  //     : null;
-  // }
-  // get obterIdUsuarioLogado(): string {
-  //   return localStorage.getItem('usuario')
-  //     ? (JSON.parse(atob(localStorage.getItem('usuario'))) as IUsuario).id
-  //     : null;
-  // }
-  // get obterTokenUsuario(): string {
-  //   return localStorage.getItem('token')
-  //     ? JSON.parse(atob(localStorage.getItem('token')))
-  //     : null;
-  // }
+  get obterUsuarioLogado(): User | null {
+    return localStorage.getItem('user')
+      ? JSON.parse(atob(localStorage.getItem('user')!)) as User
+      : null;
+  }
+  get obterIdUsuarioLogado(): string | null {
+    return localStorage.getItem('usuario')
+      ? (JSON.parse(atob(localStorage.getItem('usuario')!)) as User).id
+      : null;
+  }
+  get obterTokenUsuario(): string | null {
+    return localStorage.getItem('token')
+      ? JSON.parse(atob(localStorage.getItem('token')!))
+      : null;
+  }
 
   get logado(): boolean {
     return localStorage.getItem('token') ? true : false;
