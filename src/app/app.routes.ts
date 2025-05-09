@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ItemListComponent } from "./components/item-list/item-list.component";
-import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { UserNotAuthenticatedGuard } from './services/guards/user-not-authenticated.guard';
@@ -19,6 +19,5 @@ export const routes: Routes = [
             {path: '', component: ItemListComponent},
         ]
     },
-    // {path: '', component: LoginComponent},
     {path: '**', component: PageNotFoundComponent},
 ];

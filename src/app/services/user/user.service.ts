@@ -64,7 +64,7 @@ export class UserService {
   //     : null;
   // }
 
-  getLogado(): boolean {
+  get logado(): boolean {
     return localStorage.getItem('token') ? true : false;
   }
 }

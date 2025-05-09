@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCardContent } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar } from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 
@@ -9,9 +10,10 @@ import { UserService } from '../../services/user/user.service';
   selector: 'app-home',
   imports: [
     RouterOutlet,
-    MatToolbar,
-    MatIcon,
-    MatCardContent
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -20,7 +22,6 @@ export class HomeComponent implements OnInit{
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   deslogar(): void {

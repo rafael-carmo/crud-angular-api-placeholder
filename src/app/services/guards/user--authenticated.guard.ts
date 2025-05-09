@@ -16,7 +16,7 @@ export class UserAuthenticatedGuard implements CanActivate {
   ){}
 
   canActivate() {
-    if(this.userService.getLogado()){
+    if(this.userService.logado){
       return true;
     }
 

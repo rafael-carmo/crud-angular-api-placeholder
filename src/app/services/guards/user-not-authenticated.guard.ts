@@ -14,7 +14,7 @@ export class UserNotAuthenticatedGuard implements CanActivate{
       private userService: UserService,
       private router: Router) { }
     canActivate(){
-      if (this.userService.getLogado()) {
+      if (this.userService.logado) {
         this.router.navigate(['']);
         return false;
       }
