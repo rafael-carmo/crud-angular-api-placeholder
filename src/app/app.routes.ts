@@ -5,6 +5,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { UserNotAuthenticatedGuard } from './services/guards/user-not-authenticated.guard';
 import { UserAuthenticatedGuard } from './services/guards/user--authenticated.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -16,7 +17,8 @@ export const routes: Routes = [
         component: HomeComponent,
         canActivate: [UserAuthenticatedGuard],
         children: [
-            {path: '', component: ItemListComponent},
+            {path: '', component: DashboardComponent},
+            {path: 'items', component: ItemListComponent},
         ]
     },
     {path: '**', component: PageNotFoundComponent},

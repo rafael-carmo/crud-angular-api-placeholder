@@ -1,0 +1,23 @@
+<div class="side-wrapper">
+  <!-- LOGO -->
+  <div class="logo">
+    <a href="http://creative-tim.com" class="simple-text">
+      <div class="logo-img">
+        <img src="images/angular2-logo-white.png" alt="">
+      </div>
+      SGS
+    </a>
+  </div>
+
+  <!-- ITENS MENU -->
+   <ul class="nav responsive-nav">
+      @for (menuItem of menuItems; track menuItem) {
+        <li routerLinkActive="active" class="{{menuItem.class}}">
+          <a [routerLink]="[menuItem.path]">
+            <i class="{{menuItem.icon}}"></i>
+            <p>{{menuItem.title}}</p>
+          </a>
+        </li>
+      }
+   </ul>
+</div>

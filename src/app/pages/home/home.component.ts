@@ -5,6 +5,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
+import { NavbarComponent } from "../../components/navbar/navbar.component";
 
 @Component({
   selector: 'app-home',
@@ -13,8 +15,10 @@ import { UserService } from '../../services/user/user.service';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatButtonModule
-  ],
+    MatButtonModule,
+    SidebarComponent,
+    NavbarComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

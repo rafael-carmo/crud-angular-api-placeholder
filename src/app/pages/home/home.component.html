@@ -1,7 +1,6 @@
-<p>
+<!-- <p>
   <mat-toolbar color="primary" class="espacamento-toolbar">
     <span>Exemplo login</span>
-    <!-- <span class="espacamento-toolbar"></span> -->
     <button mat-icon-button (click)="deslogar()">
       <mat-icon fontIcon="logout"></mat-icon>
     </button>
@@ -9,13 +8,28 @@
 </p>
 <mat-card-content>
   <router-outlet />
-</mat-card-content>
+</mat-card-content> -->
 
+<div class="wrapper">
+  <div class="sidebar" data-color="red" data-image="">
+    <app-sidebar></app-sidebar>
+    <!-- <div class="sidebar-background" style="background-image: url(assets/img/sidebar-5.jpg)"></div> -->
+  </div>
 
-<!-- <h1>Angular Router App - Home</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/home/item-list" routerLinkActive="active" ariaCurrentWhenActive="page">Crud Item</a></li>
-  </ul>
-</nav>
-<router-outlet /> -->
+  <div class="main-panel">
+    <app-navbar />
+    <!-- <p>
+      <mat-toolbar color="primary" class="espacamento-toolbar">
+        <span>Exemplo login</span>
+        <button mat-icon-button (click)="deslogar()">
+          <mat-icon fontIcon="logout"></mat-icon>
+        </button>
+      </mat-toolbar>
+    </p> -->
+    <router-outlet></router-outlet>
+    <!-- <div *ngIf="isMap('maps')">
+      <footer-cmp></footer-cmp>
+    </div> -->
+  </div>
+
+</div>

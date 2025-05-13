@@ -1,0 +1,124 @@
+
+.sidebar-wrapper {
+  position: relative;
+  max-height: calc(100vh - 75px);
+  min-height: 100%;
+  overflow: auto;
+  width: 260px;
+  z-index: 4;
+  padding-bottom: 75px;
+
+  .dropdown .dropdown-backdrop {
+    display: none !important;
+  }
+}
+
+.logo {
+  padding: 10px 15px;
+  // padding: $navbar-padding-a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  p {
+    float: left;
+    font-size: 20px;
+    margin: 10px 10px;
+    // color: $white-color;
+    color: #FFFFFF;
+    line-height: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .simple-text {
+    text-transform: uppercase;
+    padding: 5px 0px;
+    display: block;
+    // font-size: $font-size-large;
+    font-size: 18px;
+    // color: $white-color;
+    color: #FFFFFF;
+    text-align: left;
+    // font-weight: $font-weight-normal;
+    font-weight: 400;
+    line-height: 30px;
+  }
+
+.logo-img {
+    width: 30px;
+    display: inline-block;
+    max-height: 30px;
+    margin-right: 10px;
+
+    img {
+      width: 35px;
+      top: 11px;
+      position: absolute;
+    }
+  }
+}
+
+ .nav{
+        margin-top: 20px;
+        float: none;
+
+        li{
+            > a{
+                color: #FFFFFF;
+                margin: 5px 15px;
+                opacity: .86;
+                border-radius: 4px;
+                display: block;
+            }
+
+            &:hover > a{
+                background: rgba(255,255,255,0.13);
+                opacity: 1;
+            }
+
+            &.active > a{
+                color: #FFFFFF;
+                opacity: 1;
+                background: rgba(255,255,255,0.23);
+
+            }
+
+            a.dropdown-toggle{
+                background-color: transparent;
+                outline: none;
+            }
+
+            &.separator{
+                margin: 15px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+                & + li {
+                    margin-top: 31px;
+                }
+            }
+        }
+
+        p{
+            margin: 0;
+            line-height: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 45px;
+            color: #FFFFFF;
+        }
+
+        i{
+            font-size: 28px;
+            float: left;
+            margin-right: 15px;
+            line-height: 30px;
+            width: 30px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .caret{
+            margin-top: 13px;
+            position: absolute;
+            right: 30px;
+        }
+    }
