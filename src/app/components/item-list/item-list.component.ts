@@ -16,6 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import {MatButtonModule} from '@angular/material/button';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ModalViewItemComponent } from './modal-view-item/modal-view-item.component';
 
 @Component({
   selector: 'app-item-list',
@@ -72,6 +73,21 @@ export class ItemListComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openViewDialog(item: Item): void {
+    const dialogRef = this.dialog.open(ModalViewItemComponent, {
+      width: '700px',
+      height: '330px',
+      data: item
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     this.loadItems();
+    //     this.showSuccess('Item adicionado com sucesso!');
+    //   }
+    // })
   }
 
   openAddDialog(): void {

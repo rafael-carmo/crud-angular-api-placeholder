@@ -22,6 +22,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --primary-color: #7533a8;
   --error-color: #ac2828;
   --gray-color: #747474;
+
+  // --chip-ativo: #{mat.get-color-from-palette($green-palette, 500)};
+  // --chip-inativo: #{mat.get-color-from-palette($red-palette, 500)};
+  // --chip-warning: #{mat.get-color-from-palette($yellow-palette, 500)};
+  @include mat.dialog-overrides((
+    container-color: orange,
+    subhead-color:red,
+  ));
 }
 
 .c-primary {

@@ -1,3 +1,46 @@
+@use '@angular/material' as mat;
+
 .teste {
   color: var(--primary-color);
+}
+
+.mat-chip-completed {
+  &--true {
+    background-color: var(--primary-color) !important;
+  }
+  &--false {
+    background-color: var(--error-color) !important;
+  }
+}
+
+.no-data {
+  padding: 8px 14px;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--primary-color);
+}
+
+tr {
+  height: 40px;
+}
+
+.th-table {
+  font-size: 14px;
+  font-weight: 500;
+  color: #5a5a5a;
+}
+.td-table {
+  font-size: 12px;
+  font-weight: 400;
+  color: #767676;
+}
+.icon-table {
+  color: #767676;
+  margin-right: 10px;
+  transform: rotate(0deg);
+  transition: all 0.3s linear;
+  &:hover {
+    color: var(--primary-color);
+    transform: rotate(359deg);  
+  }
 }
