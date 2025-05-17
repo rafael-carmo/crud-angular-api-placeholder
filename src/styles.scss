@@ -26,10 +26,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   // --chip-ativo: #{mat.get-color-from-palette($green-palette, 500)};
   // --chip-inativo: #{mat.get-color-from-palette($red-palette, 500)};
   // --chip-warning: #{mat.get-color-from-palette($yellow-palette, 500)};
-  @include mat.dialog-overrides((
-    container-color: orange,
-    subhead-color:red,
-  ));
+
+  //formatações gerais para dialogs
+  // @include mat.dialog-overrides((
+  //   container-color: orange,
+  //   subhead-color:red,
+  // ));
 }
 
 .c-primary {
@@ -42,6 +44,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .c-gray {
   color: var(--gray-color);
+}
+
+.hover:hover {
+  cursor: pointer;
 }
 
 .full-width {
