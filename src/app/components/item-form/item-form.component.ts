@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-item-form',
@@ -18,8 +19,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatDialogTitle,
+    // MatDialogTitle,
     MatDialogClose,
+    MatIconModule,
   ],
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.scss'
@@ -28,7 +30,7 @@ export class ItemFormComponent implements OnInit{
   itemForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private itemService: ItemService,
     private dialogRef: MatDialogRef<ItemFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', item?: Item }
@@ -43,8 +45,8 @@ export class ItemFormComponent implements OnInit{
   }
 
   initForm(): void {
-    this.itemForm = this.fb.group({
-      title: ['', Validators.required],
+    this.itemForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.min(3)]],
       description: [''],
       completed: [false]
     });
@@ -84,6 +86,10 @@ export class ItemFormComponent implements OnInit{
         console.error(err);
       }
     });
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 
 }

@@ -58,6 +58,7 @@ export class ItemListComponent implements OnInit{
         this.dataSource = new MatTableDataSource<Item>(items);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.paginator._intl.itemsPerPageLabel="Itens por página"
       },
       error: (err) => {
         this.showError('Erro ao carregar itens');
@@ -92,7 +93,8 @@ export class ItemListComponent implements OnInit{
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(ItemFormComponent, {
-      width: '600px',
+      width: '700px',
+      // height: '400px',
       data: { mode: 'add'}
     });
 
