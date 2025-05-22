@@ -8,9 +8,35 @@
         <span class="icon-bar"></span>
       </button> -->
       <a class="navbar-brand" href="#">{{getTitle()}}</a>
-      <button mat-icon-button (click)="deslogar()">
-        <mat-icon fontIcon="logout"></mat-icon>
-      </button>
+      <div>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <div class="">
+            <img class="img-avatar rounded-circle"
+            src="https://img.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg?semt=ais_hybrid&w=740"
+            alt=""
+            width="48"
+            height="48">
+          </div>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voice mail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
     <div class="collapse navbar-collapse">
       <!-- <ul class="nav navbar-nav navbar-left">

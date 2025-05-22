@@ -22,7 +22,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next): Observable<HttpE
       .pipe(
         catchError(error => {
             if (error instanceof HttpErrorResponse && error.status === 401){
-              userService.deslogar();
+              userService.logout();
               // Return an Observable after deslogar()
               return throwError(() => new Error('Unauthorized access - user logged out'));
             }
@@ -45,7 +45,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next): Observable<HttpE
 //       const token = this.usuarioService.obterTokenUsuario;
 //       const requestUrl: Array<any> = request.url.split('/');
 //       const apiUrl: Array<any> = environment.apiUrl.split('/');
-      
+
 //       if (token && requestUrl[2] === apiUrl[2]) {
 //           request = request.clone({
 //               setHeaders: {

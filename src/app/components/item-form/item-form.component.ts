@@ -58,6 +58,10 @@ export class ItemFormComponent implements OnInit{
     }
 
     const itemData: Item = this.itemForm.value;
+    const dados = this.itemForm.getRawValue();
+
+    console.log(itemData)
+    console.log(dados)
 
     if (this.data.mode === 'add') {
       this.addItem(itemData);
@@ -67,6 +71,7 @@ export class ItemFormComponent implements OnInit{
   }
 
   addItem(item: Item): void {
+    //exemplo deepseek
     this.itemService.create(item).subscribe({
       next: () => {
         this.dialogRef.close(true);
@@ -75,6 +80,7 @@ export class ItemFormComponent implements OnInit{
         console.error(err);
       }
     });
+
   }
 
   updateItem(id: number, item: Item): void {

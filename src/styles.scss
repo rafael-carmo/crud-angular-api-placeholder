@@ -29,8 +29,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   //formatações gerais para dialogs
   // @include mat.dialog-overrides((
-  //   container-color: orange,
-  //   subhead-color:red,
+    //   container-color: orange,
+    //   subhead-color:red,
+    // ));
+
+  //formatações gerais para dialogs
+  // @include mat.progress-spinner-overrides((
+  //   active-indicator-color: orange,
+  //   active-indicator-width: 1px,
+  //   size: 1rem,
   // ));
 }
 

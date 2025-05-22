@@ -1,5 +1,13 @@
 @use '@angular/material' as mat;
 
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: orange,
+    active-indicator-width: 5px,
+  ));
+}
+
 .teste {
   color: var(--primary-color);
 }
@@ -41,6 +49,6 @@ tr {
   transition: all 0.3s linear;
   &:hover {
     color: var(--primary-color);
-    transform: rotate(359deg);  
+    transform: rotate(359deg);
   }
 }

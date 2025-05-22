@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { MatIconModule } from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-navbar',
   imports: [
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -22,7 +26,7 @@ export class NavbarComponent {
     return 'Dashboard';
   }
 
-  deslogar(): void {
-    this.userService.deslogar();
+  logout(): void {
+    this.userService.logout();
   }
 }

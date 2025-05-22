@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  deslogar(): void {
-    this.userService.deslogar();
+  logout(): void {
+    this.userService.logout();
   }
 }

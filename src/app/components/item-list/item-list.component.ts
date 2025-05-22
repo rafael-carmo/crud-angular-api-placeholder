@@ -15,6 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ModalViewItemComponent } from './modal-view-item/modal-view-item.component';
 
@@ -30,6 +31,7 @@ import { ModalViewItemComponent } from './modal-view-item/modal-view-item.compon
     MatTableModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.scss'
@@ -37,6 +39,7 @@ import { ModalViewItemComponent } from './modal-view-item/modal-view-item.compon
 export class ItemListComponent implements OnInit{
   displayedColumns: string[] = ['id', 'title', 'completed', 'actions'];
   dataSource: MatTableDataSource<Item>;
+  dialogRef: any;
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -82,26 +85,17 @@ export class ItemListComponent implements OnInit{
       height: '330px',
       data: item
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result) {
-    //     this.loadItems();
-    //     this.showSuccess('Item adicionado com sucesso!');
-    //   }
-    // })
   }
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(ItemFormComponent, {
       width: '700px',
-      // height: '400px',
       data: { mode: 'add'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.loadItems();
-        this.showSuccess('Item adicionado com sucesso!');
+        this.closeDialogSuccess('adicionado');
       }
     })
   }
@@ -114,8 +108,7 @@ export class ItemListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.loadItems();
-        this.showSuccess('Item atualizado com sucesso!');
+        this.closeDialogSuccess('atualizado');
       }
     })
   }
@@ -139,8 +132,7 @@ export class ItemListComponent implements OnInit{
   deleteItem(id: number): void {
     this.itemService.delete(id).subscribe({
       next: () => {
-        this.loadItems();
-        this.showSuccess('Item excluído com sucesso!');
+        this.closeDialogSuccess('excluído');
       },
       error: (err) => {
         this.showError('Erro ao excluir item');
@@ -161,5 +153,10 @@ export class ItemListComponent implements OnInit{
       duration: 3000,
       panelClass: ['error-snackbar']
     });
+  }
+
+  closeDialogSuccess(title: string): void {
+    this.loadItems();
+    this.showSuccess(`Item ${title} com sucesso!`);
   }
 }

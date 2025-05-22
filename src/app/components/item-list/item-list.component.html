@@ -16,65 +16,68 @@
       </mat-form-field>
 
       <div class="table-container">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-          <!-- Coluna ID -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-            <td class="td-table" mat-cell *matCellDef="let item">{{item.id}}</td>
-          </ng-container>
+        @defer () {
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <!-- Coluna ID -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+              <td class="td-table" mat-cell *matCellDef="let item">{{item.id}}</td>
+            </ng-container>
 
-          <!-- Coluna Título -->
-          <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
-            <td class="td-table" mat-cell *matCellDef="let item">{{item.title}}</td>
-          </ng-container>
+            <!-- Coluna Título -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+              <td class="td-table" mat-cell *matCellDef="let item">{{item.title}}</td>
+            </ng-container>
 
-          <!-- Coluna Status -->
-          <ng-container matColumnDef="completed">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-            <td class="td-table" mat-cell *matCellDef="let item">
-              <mat-chip [class]="'mat-chip-completed--'+ item.completed" [color]="item.completed ? 'primary' : 'warn'">
-                {{item.completed ? 'Completo' : 'Pendente'}}
-              </mat-chip>
-              <!-- <span class="badge text-bg-warning">{{item.completed ? 'Completo' : 'Pendente'}}</span> -->
-               @if (item.completed) {
-                <mat-icon class="c-primary">check</mat-icon>
-               } @else {
-                <mat-icon class="c-error">remove</mat-icon>
-               }
+            <!-- Coluna Status -->
+            <ng-container matColumnDef="completed">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+              <td class="td-table" mat-cell *matCellDef="let item">
+                <mat-chip [class]="'mat-chip-completed--'+ item.completed" [color]="item.completed ? 'primary' : 'warn'">
+                  {{item.completed ? 'Completo' : 'Pendente'}}
+                </mat-chip>
+                <!-- <span class="badge text-bg-warning">{{item.completed ? 'Completo' : 'Pendente'}}</span> -->
+                @if (item.completed) {
+                  <mat-icon class="c-primary">check</mat-icon>
+                } @else {
+                  <mat-icon class="c-error">remove</mat-icon>
+                }
+              </td>
+            </ng-container>
 
-              
-            </td>
-          </ng-container>
+            <!-- Coluna Ações -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Ações</th>
+              <td class="td-table" mat-cell *matCellDef="let item">
+                <button mat-icon-button color="primary" (click)="openViewDialog(item)">
+                  <mat-icon class="icon-table">visibility</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="openEditDialog(item)">
+                  <mat-icon class="icon-table">edit</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" (click)="confirmDelete(item)">
+                  <mat-icon class="icon-table">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-          <!-- Coluna Ações -->
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Ações</th>
-            <td class="td-table" mat-cell *matCellDef="let item">
-              <button mat-icon-button color="primary" (click)="openViewDialog(item)">
-                <mat-icon class="icon-table">visibility</mat-icon>
-              </button>
-              <button mat-icon-button color="primary" (click)="openEditDialog(item)">
-                <mat-icon class="icon-table">edit</mat-icon>
-              </button>
-              <button mat-icon-button color="accent" (click)="confirmDelete(item)">
-                <mat-icon class="icon-table">delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- Linha quando não há dados -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="td-table" class="mat-cell no-data" [colSpan]="displayedColumns.length">
+                Nenhum dado encontrado para: "{{input.value}}"
+              </td>
+            </tr>
+          </table>
 
-          <!-- Linha quando não há dados -->
-          <tr class="mat-row" *matNoDataRow>
-            <td class="td-table" class="mat-cell no-data" [colSpan]="displayedColumns.length">
-              Nenhum dado encontrado para: "{{input.value}}"
-            </td>
-          </tr>
-        </table>
+          <mat-paginator class="shadow-sm" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
-        <mat-paginator class="shadow-sm" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        } @placeholder (){
+          <mat-spinner></mat-spinner>
+        }
       </div>
 
     </mat-card-content>

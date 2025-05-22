@@ -43,7 +43,7 @@ export class UserService {
     return of(returnMock);
   }
 
-  deslogar(): void {
+  logout(): void {
     localStorage.clear();
     this.router.navigate(['login']);
   }

@@ -7,7 +7,8 @@ import { Item } from '../interfaces/item';
   providedIn: 'root'
 })
 export class ItemService {
-  private endpoint = 'todos';// Endpoint da API (usando JSONPlaceholder como exemplo)
+  // private endpoint = 'todos';// Endpoint da API (usando JSONPlaceholder como exemplo)
+  private endpoint = 'items';// Endpoint da API springboot
 
   constructor(private apiService: ApiService) { }
 
