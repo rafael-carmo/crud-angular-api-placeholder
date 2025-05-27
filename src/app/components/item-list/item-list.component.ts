@@ -2,7 +2,7 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import {MatChipsModule} from '@angular/material/chips';
 import { Item } from '../../interfaces/item';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,6 +26,7 @@ import { ModalViewItemComponent } from './modal-view-item/modal-view-item.compon
     MatIconModule,
     MatCardModule,
     MatPaginator,
+    MatPaginatorModule,
     MatChipsModule,
     MatFormFieldModule,
     MatTableModule,
@@ -37,9 +38,15 @@ import { ModalViewItemComponent } from './modal-view-item/modal-view-item.compon
   styleUrl: './item-list.component.scss'
 })
 export class ItemListComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'title', 'completed', 'actions'];
+  displayedColumns: string[] = ['id', 'title', 'username', 'email', 'completed', 'actions'];
   dataSource: MatTableDataSource<Item>;
   dialogRef: any;
+
+  length: number;
+  pageIndex: number = 0;
+  pageSize: number = 5;
+
+  pageEvent: PageEvent;
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -52,22 +59,50 @@ export class ItemListComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.loadItems();
+    this.loadItems(this.pageSize, this.pageIndex);
   }
 
-  loadItems(): void {
-    this.itemService.getItems().subscribe({
+  loadItems(pageSize: number, pageIndex: number): void {
+    this.itemService.getItems(pageSize, pageIndex).subscribe({
       next: (items) => {
-        this.dataSource = new MatTableDataSource<Item>(items);
+        console.log(`items:`)
+        console.log(items)
+        this.dataSource = new MatTableDataSource<Item>(items.content);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.paginator._intl.itemsPerPageLabel="Itens por página"
+        // this.paginator._intl.itemsPerPageLabel="Itens por página";
+        this.length = items.totalElements;
+        this.pageIndex = 1;
       },
       error: (err) => {
         this.showError('Erro ao carregar itens');
         console.error(err);
       }
     });
+  }
+
+  // loadItems(): void {
+  //   this.itemService.getItems().subscribe({
+  //     next: (items) => {
+  //       this.dataSource = new MatTableDataSource<Item>(items);
+  //       this.dataSource.paginator = this.paginator;
+  //       this.dataSource.sort = this.sort;
+  //       this.paginator._intl.itemsPerPageLabel="Itens por página"
+  //     },
+  //     error: (err) => {
+  //       this.showError('Erro ao carregar itens');
+  //       console.error(err);
+  //     }
+  //   });
+  // }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize; //elementos por pagina
+    this.pageIndex = e.pageIndex; //pagina atual
+
+    this.loadItems(this.pageSize, this.pageIndex);
   }
 
   applyFilter(event: Event): void {
@@ -156,7 +191,7 @@ export class ItemListComponent implements OnInit{
   }
 
   closeDialogSuccess(title: string): void {
-    this.loadItems();
+    this.loadItems(this.pageSize, this.pageIndex);
     this.showSuccess(`Item ${title} com sucesso!`);
   }
 }

@@ -16,6 +16,7 @@ export class ApiService {
 
   //metodos genericos para CRUD
   get<T>(endpoint: string): Observable<T> {
+    console.log(`path: ${this.apiUrl}/${endpoint}`);
     return this.http.get<T>(`${this.apiUrl}/${endpoint}`, {
       headers: this.headers
     });

@@ -30,6 +30,18 @@
               <td class="td-table" mat-cell *matCellDef="let item">{{item.title}}</td>
             </ng-container>
 
+            <!-- Coluna User -->
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuário</th>
+              <td class="td-table" mat-cell *matCellDef="let item">{{item.user.username}}</td>
+            </ng-container>
+
+            <!-- Coluna User -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+              <td class="td-table" mat-cell *matCellDef="let item">{{item.user.email}}</td>
+            </ng-container>
+
             <!-- Coluna Status -->
             <ng-container matColumnDef="completed">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
@@ -73,7 +85,14 @@
             </tr>
           </table>
 
-          <mat-paginator class="shadow-sm" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <mat-paginator class="shadow-sm"
+            [pageSizeOptions]="[5, 10, 20]"
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageIndex]="pageIndex"
+            [pageSize]="pageSize"
+            showFirstLastButtons>
+          </mat-paginator>
 
         } @placeholder (){
           <mat-spinner></mat-spinner>

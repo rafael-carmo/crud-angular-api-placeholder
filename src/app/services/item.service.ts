@@ -12,9 +12,13 @@ export class ItemService {
 
   constructor(private apiService: ApiService) { }
 
-  getItems(): Observable<Item[]> {
-    return this.apiService.get<Item[]>(this.endpoint);
+  getItems(pageSize: number, pageIndex: number): Observable<any> {
+    const params = `?size=${pageSize}&page=${pageIndex}`;
+    return this.apiService.get<any>(`${this.endpoint}${params}`);
   }
+  // getItems(): Observable<Item[]> {
+  //   return this.apiService.get<Item[]>(this.endpoint);
+  // }
 
   getById(id: number): Observable<Item> {
     return this.apiService.get<Item>(`${this.endpoint}/${id}`);
