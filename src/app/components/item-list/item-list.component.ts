@@ -18,6 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ModalViewItemComponent } from './modal-view-item/modal-view-item.component';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-item-list',
@@ -39,15 +40,13 @@ import { ModalViewItemComponent } from './modal-view-item/modal-view-item.compon
 })
 export class ItemListComponent implements OnInit{
   displayedColumns: string[] = ['id', 'title', 'username', 'email', 'completed', 'actions'];
-  dataSource: MatTableDataSource<Item>;
+  // dataSource: MatTableDataSource<Item>;
+  dataSource: Item[] = [];
   dialogRef: any;
 
-  length: number;
-  pageIndex: number = 0;
+  totalElements: number = 0;
   pageSize: number = 5;
-
-  pageEvent: PageEvent;
-
+  pageIndex: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -59,20 +58,30 @@ export class ItemListComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.loadItems(this.pageSize, this.pageIndex);
+    this.loadItems();
   }
 
-  loadItems(pageSize: number, pageIndex: number): void {
-    this.itemService.getItems(pageSize, pageIndex).subscribe({
+  loadItems(): void {
+    const params = new HttpParams()
+      .set('size', this.pageSize)
+      .set('page', this.pageIndex);
+
+    this.itemService.getItems(params).subscribe({
       next: (items) => {
-        console.log(`items:`)
-        console.log(items)
-        this.dataSource = new MatTableDataSource<Item>(items.content);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        console.log(items);
+        this.dataSource = items.content;
+        this.totalElements = items.totalElements;
+
+
+        // this.dataSource = new MatTableDataSource<Item>(items.content);
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+
+
         // this.paginator._intl.itemsPerPageLabel="Itens por página";
-        this.length = items.totalElements;
-        this.pageIndex = 1;
+        // this.totalElements = items.totalElements;
+        // this.pageIndex = 1;
+
       },
       error: (err) => {
         this.showError('Erro ao carregar itens');
@@ -97,21 +106,24 @@ export class ItemListComponent implements OnInit{
   // }
 
   handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.length = e.length;
+    console.log(`handlePageEvent: length: ${e.length} - pageSize: ${e.pageSize} - pageIndex: ${e.pageIndex}`)
     this.pageSize = e.pageSize; //elementos por pagina
     this.pageIndex = e.pageIndex; //pagina atual
 
-    this.loadItems(this.pageSize, this.pageIndex);
+    this.loadItems();
   }
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(`filterValue: ${filterValue}`)
+    const dataSourceFiltered = this.dataSource.filter(item => item.user.username === filterValue.trim().toLowerCase());
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    console.log(`data source filter: ${dataSourceFiltered}`)
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
   }
 
   openViewDialog(item: Item): void {
@@ -191,7 +203,7 @@ export class ItemListComponent implements OnInit{
   }
 
   closeDialogSuccess(title: string): void {
-    this.loadItems(this.pageSize, this.pageIndex);
+    this.loadItems();
     this.showSuccess(`Item ${title} com sucesso!`);
   }
 }

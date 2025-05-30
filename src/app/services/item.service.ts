@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Item } from '../interfaces/item';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,12 @@ export class ItemService {
 
   constructor(private apiService: ApiService) { }
 
-  getItems(pageSize: number, pageIndex: number): Observable<any> {
-    const params = `?size=${pageSize}&page=${pageIndex}`;
-    return this.apiService.get<any>(`${this.endpoint}${params}`);
+  getItems(params?: HttpParams): Observable<any> {
+    return this.apiService.get<any>(this.endpoint, params);
   }
-  // getItems(): Observable<Item[]> {
-  //   return this.apiService.get<Item[]>(this.endpoint);
+  // getItems(pageSize: number, pageIndex: number): Observable<any> {
+  //   const params = `?size=${pageSize}&page=${pageIndex}`;
+  //   return this.apiService.get<any>(`${this.endpoint}${params}`);
   // }
 
   getById(id: number): Observable<Item> {
