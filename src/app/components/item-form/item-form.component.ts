@@ -8,6 +8,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-item-form',
@@ -40,6 +41,8 @@ export class ItemFormComponent implements OnInit{
     this.initForm();
 
     if (this.data.mode === 'edit' && this.data.item) {
+      console.log('aqui')
+      console.log(`item: ${this.data.item.user.id}`)
       this.itemForm.patchValue(this.data.item);
     }
   }
@@ -48,7 +51,8 @@ export class ItemFormComponent implements OnInit{
     this.itemForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.min(3)]],
       description: [''],
-      completed: [false]
+      completed: [false],
+      user: [this.data.item?.user]
     });
   }
 
@@ -60,10 +64,17 @@ export class ItemFormComponent implements OnInit{
     const itemData: Item = this.itemForm.value;
     const dados = this.itemForm.getRawValue();
 
-    console.log(itemData)
-    console.log(dados)
+    console.log(`itemDAta id: ${itemData.id}`);
+    console.log(`dados: ${dados}`);
 
     if (this.data.mode === 'add') {
+      //o usuário abaixo não precisaria ser criado quando tiver passando o token com o usuário logado.
+      const user: User = {
+        id: 1,
+        email: '',
+        password: ''
+      }
+      itemData.user = user;
       this.addItem(itemData);
     } else if (this.data.mode === 'edit' && this.data.item) {
       this.updateItem(this.data.item.id!, itemData);
@@ -74,10 +85,12 @@ export class ItemFormComponent implements OnInit{
     //exemplo deepseek
     this.itemService.create(item).subscribe({
       next: () => {
-        this.dialogRef.close(true);
+        this.dialogRef.close({
+          status: 201
+        });
       },
       error: (err) => {
-        console.error(err);
+        this.dialogRef.close(err.error);
       }
     });
 
@@ -86,10 +99,13 @@ export class ItemFormComponent implements OnInit{
   updateItem(id: number, item: Item): void {
     this.itemService.update(id, item).subscribe({
       next: () => {
-        this.dialogRef.close(true);
+        // this.dialogRef.close(true);
+        this.dialogRef.close({
+          status: 200
+        });
       },
       error: (err) => {
-        console.error(err);
+        this.dialogRef.close(err.error);
       }
     });
   }

@@ -141,10 +141,17 @@ export class ItemListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if(result.status === 201) {
         this.closeDialogSuccess('adicionado');
+      } else if (result.status === 409) {
+        this.showError(result.message);
       }
     })
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     this.closeDialogSuccess('adicionado');
+    //   }
+    // })
   }
 
   openEditDialog(item: Item): void {
@@ -154,9 +161,14 @@ export class ItemListComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if(result.status === 200) {
         this.closeDialogSuccess('atualizado');
+      } else if (result.status === 409) {
+        this.showError(result.message);
       }
+      // if(result) {
+      //   this.closeDialogSuccess('atualizado');
+      // }
     })
   }
 
@@ -197,7 +209,7 @@ export class ItemListComponent implements OnInit{
 
   showError(message: string): void {
     this.snackBar.open(message, 'Fechar', {
-      duration: 3000,
+      duration: 5000,
       panelClass: ['error-snackbar']
     });
   }
@@ -206,4 +218,5 @@ export class ItemListComponent implements OnInit{
     this.loadItems();
     this.showSuccess(`Item ${title} com sucesso!`);
   }
+
 }
