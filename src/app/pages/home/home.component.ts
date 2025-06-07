@@ -7,6 +7,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
     MatCardModule,
     MatButtonModule,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    MatSidenavModule
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

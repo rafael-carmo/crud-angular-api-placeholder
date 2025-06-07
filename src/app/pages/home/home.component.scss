@@ -48,3 +48,33 @@
       }
     }
 }
+
+.example-sidenav-content {
+  height: 100vh;
+}
+
+.example-sidenav {
+  background-color: red;
+}
+
+
+// EXEMPLO DESTE SITE
+// https: //bootstrapexamples.com/@bruno-dezan/collapsible-sidebarteste
+:root {
+  --sidebar-width: 280px;
+  --sidebar-width-collapsed: 80px;
+}
+.side {
+  width: var(--sidebar-width);
+}
+.main-content {
+  margin-left: 280px; //var(--sidebar-width);
+  width: calc(100% - 280px);
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  // padding: 20px;
+  transition: all 0.3s ease;
+}
+.collapsed~.main-content {
+  margin-left: var(--sidebar-width-collapsed);
+}
