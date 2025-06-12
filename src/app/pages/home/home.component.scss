@@ -75,6 +75,11 @@
   // padding: 20px;
   transition: all 0.3s ease;
 }
-.collapsed~.main-content {
-  margin-left: var(--sidebar-width-collapsed);
+.collapsed {
+  // margin-left: var(--sidebar-width-collapsed);
+  margin-left: 80px;
+  margin-right: 0;
+}
+.main-content.collapsed {
+  width: 100%;
 }

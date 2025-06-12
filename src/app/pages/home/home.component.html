@@ -32,9 +32,9 @@
 
 <div class="d-flex">
   <div class="side">
-    <app-sidebar></app-sidebar>
+    <app-sidebar #sidebar></app-sidebar>
   </div>
-  <main class="main-content">
+  <main class="main-content" [class.collapsed]="sidebar.isCollapsed">
     <app-navbar />
     <router-outlet></router-outlet>
   </main>

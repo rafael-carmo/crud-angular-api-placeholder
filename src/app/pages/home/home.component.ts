@@ -19,7 +19,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatButtonModule,
     SidebarComponent,
     NavbarComponent,
-    MatSidenavModule
+    MatSidenavModule,
+    SidebarComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

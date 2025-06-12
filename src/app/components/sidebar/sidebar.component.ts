@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 declare interface RouteInfo {
   path: string;
@@ -22,18 +23,24 @@ export const ROUTES: RouteInfo[] = [
   selector: 'app-sidebar',
   imports: [
     RouterLink,
-    MatIconModule
+    MatIconModule,
+    CommonModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  isCollapsed = false;
 
   constructor(){}
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
   }
 
 

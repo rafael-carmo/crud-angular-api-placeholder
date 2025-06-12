@@ -22,19 +22,24 @@
    </ul>
 </div> -->
 
-<nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed">
-  <div class="p-4">
-    <h4 class="logo-text fw-bold mb-0">NexusFlow</h4>
-    <p class="text-muted small hide-on-collapse">Dashboard</p>
+<nav class="sidebar d-flex flex-column flex-shrink-0 position-fixed" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header p-4">
+    <h4 class="logo-text fw-bold mb-0" (click)="toggleSidebar()">NexusFlow</h4>
+    <span *ngIf="!isCollapsed" class="text-muted small hide-on-collapse">Dashboard</span>
   </div>
 
   <div class="nav flex-column">
     @for (menuItem of menuItems; track menuItem) {
       <a [routerLink]="[menuItem.path]" class="{{menuItem.class}}">
         <mat-icon aria-hidden="false" aria-label="Example home icon" class="me-3" fontIcon="{{menuItem.icon}}"></mat-icon>
-        <span class="hide-on-collapse">{{menuItem.title}}</span>
+        <span *ngIf="!isCollapsed">{{menuItem.title}}</span>
+        <!-- <span class="hide-on-collapse">{{menuItem.title}}</span> -->
       </a>
     }
+  </div>
+
+  <div class="sidebar-footer" *ngIf="!isCollapsed">
+    <p>Angular 19 Sidebar</p>
   </div>
 
 </nav>
