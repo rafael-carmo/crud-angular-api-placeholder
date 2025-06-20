@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signup',
   imports: [
     // MatCardContent,
     // MatCardModule,
@@ -31,10 +31,10 @@ import { LoginService } from '../../services/login/login.service';
 providers: [
   LoginService
 ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class LoginComponent {
+export class SignupComponent {
   // implements OnInit
   // formLogin: FormGroup;
 
@@ -67,14 +67,14 @@ export class LoginComponent {
   //   })
   // }
 
-  loginForm: FormGroup;
+  signupForm: FormGroup;
 
   constructor(
     private router: Router,
     private loginService: LoginService,
     private snackBar: MatSnackBar
   ){
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
 
@@ -82,8 +82,8 @@ export class LoginComponent {
   }
 
   submit(){
-    this.loginService.login(this.loginForm.value.email,
-      this.loginForm.value.password
+    this.loginService.login(this.signupForm.value.email,
+      this.signupForm.value.password
     ).subscribe({
       next: () => console.log('sucesso'),
       error: () => {
@@ -97,6 +97,6 @@ export class LoginComponent {
     )
   }
   navigate(){
-    this.router.navigate(['/signup']);
+    this.router.navigate(['/login']);
   }
 }
