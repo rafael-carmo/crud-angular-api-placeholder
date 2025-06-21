@@ -6,7 +6,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { UserNotAuthenticatedGuard } from './services/guards/user-not-authenticated.guard';
 import { UserAuthenticatedGuard } from './services/guards/user--authenticated.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { SignupComponent } from './pages/signup/signup.component';
+import { SignUpComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
     {
@@ -14,7 +14,7 @@ export const routes: Routes = [
       canActivate: [UserNotAuthenticatedGuard]
     },
     {
-      path: 'signup', component: SignupComponent,
+      path: 'signup', component: SignUpComponent,
     },
     {
         path: '',

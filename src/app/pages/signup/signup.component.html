@@ -1,50 +1,21 @@
-<!-- <mat-card-content>
-  <mat-card class="card-login">
-    <mat-card-title>
-      Login
-    </mat-card-title>
-    <form [formGroup]="formLogin" novalidate>
-      <mat-card-content class="conteudo-login">
-        <mat-form-field appearance="outline" class="form-field-full">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="email" placeholder="Ex. perukas@example.com">
-          @if (formLogin.get('email')?.hasError('email') && formLogin.get('email')?.touched) {
-            <mat-error>
-              Por favor informe um email válido
-            </mat-error>
-          }
-          @if (formLogin.get('email')?.hasError('required') && formLogin.get('email')?.touched) {
-            <mat-error>
-              Email é <strong>obrigatório</strong>
-            </mat-error>
-          }
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="form-field-full">
-          <mat-label>Senha</mat-label>
-          <input type="password" matInput formControlName="password">
-          @if (formLogin.get('password')?.invalid && formLogin.get('password')?.touched) {
-            <mat-error>
-              Senha é <strong>obrigatória</strong>
-            </mat-error>
-          }
-        </mat-form-field>
-      </mat-card-content>
-    </form>
-    <mat-card-actions align="end">
-      <button mat-button color="primary" class="full" align="end" (click)="logar()">Entrar</button>
-    </mat-card-actions>
-  </mat-card>
-</mat-card-content> -->
-
 <app-default-login-layout
-  title="Login into you account"
-  primaryBtnText="Login Now"
-  secondaryBtnText="Signup Now"
+  title="Sign in and start today!t"
+  primaryBtnText="Signup Now"
+  secondaryBtnText="Login Now"
   (submit)="submit()"
   (navigate)="navigate()"
-  [disablePrimaryBtn]="!signupForm.valid"
->
+  [disablePrimaryBtn]="!signupForm.valid">
+
   <form [formGroup]="signupForm">
+    <app-primary-input
+      formControlName="name"
+      inputName="name"
+      type="text"
+      label="Your name"
+      placeholder="John Doe"
+    >
+      <img src="images/svg/email-icon.svg" />
+    </app-primary-input>
     <app-primary-input
       formControlName="email"
       inputName="email"
@@ -52,16 +23,23 @@
       label="Email"
       placeholder="johndoe@gmail.com"
     >
-      <img src="images/svg/email-icon.svg"/>
+      <img src="images/svg/email-icon.svg" />
     </app-primary-input>
     <app-primary-input
       formControlName="password"
       inputName="password"
       type="password"
-      label="Password"
+      label="Your Password"
     >
-      <img src="images/svg/password-icon.svg"/>
+      <img src="images/svg/password-icon.svg" />
     </app-primary-input>
-    <span>Forgot password?</span>
+    <app-primary-input
+      formControlName="passwordConfirm"
+      inputName="passwordConfirm"
+      type="password"
+      label="Confirm your Password"
+    >
+      <img src="images/svg/password-icon.svg" />
+    </app-primary-input>
   </form>
 </app-default-login-layout>

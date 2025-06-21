@@ -22,7 +22,6 @@ export class LoginService {
   login(email: string, password: string) {
     return this.apiService.post<LoginResponse>(`${this.endpoint}`, {email, password}).pipe(
       tap((response) => {
-
         sessionStorage.setItem('auth-token', response.token)
         sessionStorage.setItem('username', response.name)
         // this.router.navigate(['']);
