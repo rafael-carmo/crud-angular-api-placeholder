@@ -85,7 +85,10 @@ export class LoginComponent {
     this.loginService.login(this.loginForm.value.email,
       this.loginForm.value.password
     ).subscribe({
-      next: () => console.log('sucesso'),
+      next: () => {
+        console.log('sucesso');
+        this.router.navigate(['']);
+      },
       error: () => {
         console.error('error');
         this.snackBar.open('Falha na autenticação', 'Ususário ou senha incorretos', {

@@ -44,27 +44,27 @@ export class UserService {
   }
 
   logout(): void {
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['login']);
   }
 
   get obterUsuarioLogado(): User | null {
-    return localStorage.getItem('user')
-      ? JSON.parse(atob(localStorage.getItem('user')!)) as User
+    return sessionStorage.getItem('user')
+      ? JSON.parse(atob(sessionStorage.getItem('user')!)) as User
       : null;
   }
   get obterIdUsuarioLogado(): number | null {
-    return localStorage.getItem('usuario')
-      ? (JSON.parse(atob(localStorage.getItem('usuario')!)) as User).id
+    return sessionStorage.getItem('usuario')
+      ? (JSON.parse(atob(sessionStorage.getItem('usuario')!)) as User).id
       : null;
   }
   get obterTokenUsuario(): string | null {
-    return localStorage.getItem('token')
-      ? JSON.parse(atob(localStorage.getItem('token')!))
+    return sessionStorage.getItem('auth-token')
+      ? JSON.parse(atob(sessionStorage.getItem('auth-token')!))
       : null;
   }
 
   get logado(): boolean {
-    return localStorage.getItem('token') ? true : false;
+    return sessionStorage.getItem('auth-token') ? true : false;
   }
 }

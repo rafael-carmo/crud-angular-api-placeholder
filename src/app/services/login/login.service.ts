@@ -11,7 +11,7 @@ import { tap } from 'rxjs';
 })
 export class LoginService {
 
-  private endpoint = 'login';// Endpoint da API springboot
+  private endpoint = 'auth';// Endpoint da API springboot
 
   constructor(
     // private httpClient: HttpClient,
@@ -20,7 +20,17 @@ export class LoginService {
   ) { }
 
   login(email: string, password: string) {
-    return this.apiService.post<LoginResponse>(`${this.endpoint}`, {email, password}).pipe(
+    return this.apiService.post<LoginResponse>(`${this.endpoint}/login`, {email, password}).pipe(
+      tap((response) => {
+        sessionStorage.setItem('auth-token', response.token)
+        sessionStorage.setItem('username', response.name)
+        // this.router.navigate(['']);
+      })
+    );
+  }
+
+  signup(name: string, email: string, password: string) {
+    return this.apiService.post<LoginResponse>(`${this.endpoint}/register`, {name, email, password}).pipe(
       tap((response) => {
         sessionStorage.setItem('auth-token', response.token)
         sessionStorage.setItem('username', response.name)

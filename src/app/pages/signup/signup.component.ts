@@ -44,10 +44,15 @@ export class SignUpComponent {
   }
 
   submit(){
-    this.loginService.login(this.signupForm.value.email,
+    this.loginService.signup(
+      this.signupForm.value.name,
+      this.signupForm.value.email,
       this.signupForm.value.password
     ).subscribe({
-      next: () => console.log('sucesso'),
+      next: () => {
+        console.log('sucesso');
+        this.router.navigate(['/login']);
+      },
       error: () => {
         console.error('error');
         this.snackBar.open('Erro inesperado!','Tente novamente mais tarde', {
