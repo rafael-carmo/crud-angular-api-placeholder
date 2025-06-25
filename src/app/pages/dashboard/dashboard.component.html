@@ -1,1 +1,93 @@
-<p>dashboard works!</p>
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <div class="metric-card bg-primary">
+          <div class="metric-value">1,254</div>
+          <div class="metric-label">Total de Usuários</div>
+          <i class="bi bi-people"></i>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card bg-success">
+          <div class="metric-value">$12,345</div>
+          <div class="metric-label">Receita Total</div>
+          <i class="bi bi-currency-dollar"></i>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card bg-warning">
+          <div class="metric-value">
+            @defer () {
+              {{totalItems}}
+            }
+            <!-- @loading (minimum 3s) {
+              <div class="spinner-border text-warning" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            } -->
+            @placeholder (minimum 3s){
+              <div class="spinner-border text-warning" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            }
+          </div>
+          <div class="metric-label">Novos Clientes</div>
+          <i class="bi bi-person-plus"></i>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card bg-danger">
+          <div class="metric-value">89%</div>
+          <div class="metric-label">Satisfação</div>
+          <i class="bi bi-emoji-smile"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h5>Vendas Mensais</h5>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [xaxis]="chartOptions.xaxis"
+                [stroke]="chartOptions.stroke"
+                [tooltip]="chartOptions.tooltip"
+                [colors]="chartOptions.colors">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h5>Distribuição de Vendas</h5>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <!-- <apx-chart [series]="pieChartOptions.series" [labels]="pieChartOptions.labels"
+                [colors]="pieChartOptions.colors">
+              </apx-chart> -->
+              <apx-chart
+                [series]="pieChartOptions.series"
+                [chart]="pieChartOptions.chart"
+                [labels]="pieChartOptions.labels"
+                [colors]="pieChartOptions.colors">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

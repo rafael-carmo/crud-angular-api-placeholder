@@ -1,0 +1,66 @@
+@import "../../../styles/variables.scss";
+
+.main-content {
+  padding-top: 26px;
+  padding-bottom: 20px;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  transition: all 0.3s;
+
+  .metric-card {
+      padding: 20px;
+      border-radius: 8px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      .metric-value {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .metric-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      i {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+        opacity: 0.2;
+      }
+  }
+
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+    .card-header {
+      background-color: white;
+      border-bottom: 1px solid #eee;
+      padding: 15px 20px;
+      border-radius: 8px 8px 0 0 !important;
+
+      h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+    }
+
+    .card-body {
+      padding: 20px;
+
+      .chart-container {
+        height: 300px;
+      }
+    }
+  }
+}

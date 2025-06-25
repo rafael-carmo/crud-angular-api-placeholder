@@ -60,8 +60,11 @@ export class UserService {
   }
   get obterTokenUsuario(): string | null {
     return sessionStorage.getItem('auth-token')
-      ? JSON.parse(atob(sessionStorage.getItem('auth-token')!))
+      ? sessionStorage.getItem('auth-token')
       : null;
+    // return sessionStorage.getItem('auth-token')
+    //   ? JSON.parse(atob(sessionStorage.getItem('auth-token')!))
+    //   : null;
   }
 
   get logado(): boolean {
