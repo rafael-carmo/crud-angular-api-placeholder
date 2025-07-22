@@ -4,8 +4,17 @@
     <div class="row mb-4">
       <div class="col-md-3">
         <div class="metric-card bg-primary">
-          <div class="metric-value">1,254</div>
-          <div class="metric-label">Total de Usuários</div>
+          <div class="metric-value">
+            @defer () {
+              {{totalViaturas}}
+            }
+            @placeholder (minimum 1s){
+            <div class="spinner-border text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            }
+          </div>
+          <div class="metric-label">Total de Viaturas</div>
           <i class="bi bi-people"></i>
         </div>
       </div>
@@ -27,7 +36,7 @@
                 <span class="visually-hidden">Loading...</span>
               </div>
             } -->
-            @placeholder (minimum 3s){
+            @placeholder (minimum 1s){
               <div class="spinner-border text-warning" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>

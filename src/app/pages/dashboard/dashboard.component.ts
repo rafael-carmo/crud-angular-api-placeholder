@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChartType, NgApexchartsModule } from "ng-apexcharts";
 import { ItemService } from '../../services/item.service';
+import { ViaturaService } from '../../services/viatura/viatura.service';
 
 // export type ChartOptions = {
 //   series: ApexAxisChartSeries;
@@ -20,6 +21,11 @@ export type PieOptions = {
   labels: any;
 };
 
+export type TipoAbastecimento = {
+  tipoAbastecimento: string;
+  quantidade: number;
+}
+
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -28,9 +34,12 @@ export type PieOptions = {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
 
   totalItems: number | string = 0;
+  totalViaturas: number | string = 0;
+  series: number[] = [];
+  labels: string[] = [];
 
   chartOptions = {
     series: [{
@@ -73,8 +82,27 @@ export class DashboardComponent {
     colors: ["#3498db", "#2ecc71", "#f39c12", "#e74c3c"]
   };
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService,
+      private viaturaService: ViaturaService
+  ) {
     this.getNewClientes();
+    this.getTotalViaturas();
+  }
+  ngOnInit(): void {
+    this.getSeries();
+  }
+
+  getTotalViaturas() {
+    this.viaturaService.getTotalViaturas().subscribe({
+      next: (total) => {
+        console.log(`total viaturas: ${total}`);
+        this.totalViaturas = total;
+      },
+      error: (error) => {
+        this.totalViaturas = 'Erro';
+        console.log(error);
+      }
+    })
   }
 
   getNewClientes() {
@@ -87,5 +115,34 @@ export class DashboardComponent {
         console.log(error);
       }
     })
+  }
+
+  getSeries() {
+    this.viaturaService.getTotalByTipoAbastecimento().subscribe({
+      next: (items: TipoAbastecimento[]) => {
+        // console.log(`Graficos dados: ${items.tipoAbastecimento} - ${items.quantidade}`);
+        this.series = items.map((item: { tipoAbastecimento: string; quantidade: number; }) => item.quantidade);
+        this.labels = items.map((item: { tipoAbastecimento: string; quantidade: number; }) => item.tipoAbastecimento || 'Não especificado');
+
+        console.log(`Series: ${this.series}`);
+        console.log(`Labels: ${this.labels}`);
+        // Atualiza as opções do gráfico de pizza
+        // this.pieChartOptions = {
+        //   series: this.series,
+        //   chart: {
+        //     type: 'donut' as const,
+        //     height: 350
+        //   },
+        //   labels: this.labels,
+        //   colors: ["#3498db", "#2ecc71", "#f39c12", "#e74c3c"]
+        // };
+
+        this.pieChartOptions.series = this.series;
+        this.pieChartOptions.labels = this.labels;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 }

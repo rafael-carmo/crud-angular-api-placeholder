@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private apiUrl = environment.apiUrl;
+  private apiUrlViaturas = environment.apiUrlViaturas;
   private headers = new HttpHeaders({
     'Content-Type': 'application/json; charset=UTF-8',
   });
@@ -19,6 +20,15 @@ export class ApiService {
     console.log(`path api service: ${this.apiUrl}/${endpoint}`);
     console.log(`params api service: ${params}`);
     return this.http.get<T>(`${this.apiUrl}/${endpoint}`, {
+      headers: this.headers,
+      params
+    });
+  }
+
+  get2<T>(endpoint: string, params?: HttpParams): Observable<T> {
+    console.log(`path api service: ${this.apiUrlViaturas}/${endpoint}`);
+    console.log(`params api service: ${params}`);
+    return this.http.get<T>(`${this.apiUrlViaturas}/${endpoint}`, {
       headers: this.headers,
       params
     });
